@@ -1,50 +1,41 @@
 _ = require('underscore');
 var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
+var historyNav;
 
 
 var App = new Marionette.Application({
-  history: 1,
   onStart: function(options) {
     var preguntesView = Marionette.ItemView.extend({
       el: '#app-hook',
-      template: require('./templates/layout.html'),
+      template: false,
       events: {
         'click .answer': 'answerClick'
       }
     });
     var preguntes = new preguntesView();
-    preguntes.render();
-/*    preguntes.triggerMethod('show');*/
-    this.hideAll();
+    historyNav="p1";
+    this.showSlide(historyNav);
     this.onClickAnswer();
   },
   hideAll: function() {
     $(".to_hide").hide();
   },
   showSlide: function(slide) {
+    this.hideAll();
+    $("."+slide).show();
     console.log(this.history);
     console.log(slide);
   },
-  answerClick: function(e){
-    console.log(this);
-    console.log(e);
-    console.log('seguir');
-    e.preventDefault();
-    console.log('seguir 1');
-
-    e.stopPropagation();
-    console.log('seguir 2');
-
-    target_elem = e.target;
-    console.log('seguir 3');
-
-    console.log($(target_elem).data());
-    console.log('end');
-  },
   onClickAnswer: function() {
-    $(".answer").click(function() {
-      alert( "Handler for .click() called." );
+    $(".answer").click(function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      target_elem = e.target;
+      slide = $(target_elem).data("go_slide");
+      console.log(slide);
+      historyNav=slide;
+      App.showSlide(historyNav);
     });
   }
 
