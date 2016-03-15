@@ -1,0 +1,19 @@
+{
+  "name": "marionette-todo-browserify",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify app/marionette_shim.js app/driver.js -t node-underscorify -o static/js/bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "backbone": "^1.3.2",
+    "backbone.marionette": "^2.4.4",
+    "jquery": "^2.2.1",
+    "node-underscorify": "0.0.14",
+    "underscore": "^1.7.0"
+  }
+}
